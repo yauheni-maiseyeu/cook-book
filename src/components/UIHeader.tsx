@@ -3,16 +3,16 @@ import { FC } from 'react';
 import { StyleProp, StyleSheet, Text, View, ViewProps, ViewStyle } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-interface IUIHeaderProps extends ViewProps {
+export interface IUIHeaderProps extends ViewProps {
   title?: string;
-  style?: StyleProp<ViewStyle>;
+  headerStyle?: StyleProp<ViewStyle>;
   leftIcon?: boolean;
   rightIcon?: boolean;
 }
 
-export const UIHeader: FC<IUIHeaderProps> = ({ title, style, leftIcon, rightIcon }) => {
+export const UIHeader: FC<IUIHeaderProps> = ({ title, headerStyle, leftIcon, rightIcon }) => {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, headerStyle]}>
       <View>{leftIcon && <AntDesign name="left" size={24} color={Colors.mineShaft} />}</View>
       {title && <Text style={styles.title}>{title}</Text>}
       <View>{rightIcon && <AntDesign name="right" size={24} color={Colors.mineShaft} />}</View>

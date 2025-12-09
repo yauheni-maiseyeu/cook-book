@@ -1,38 +1,40 @@
 import { UIButton } from '@/components/UIButton';
-import { UIHeader } from '@/components/UIHeader';
 import { UIInput } from '@/components/UIInput';
+import { UIModal } from '@/components/UIModal';
+import { UIScreen } from '@/components/UIScreen';
 import { UIText } from '@/components/UIText';
-import Colors from '@/constants/Colors';
+import { useModal } from '@/hooks/useModal';
 import { Stack } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Index() {
-  // const {isOpen, close,open } = useModal()
+  const { isOpen, onClose, onOpen } = useModal();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <UIScreen isHeaderNeeded={true} leftIcon title="UIHeader">
       <Stack.Screen options={{ headerShown: false }} />
-      <UIHeader leftIcon title="UIHeader" />
       <View style={styles.content}>
         <UIText type="header" style={styles.heading}>
           Title
         </UIText>
         <UIInput placeholder="Enter your text" label="Enter your text" />
+        <UIButton label="Open modal" action={onOpen} />
+
         <UIButton label="Ok" action={() => {}} />
       </View>
 
-      {/* <UIModal isOpen={isOpen} close={close}> */}
-      {/* </UIModal> */}
-    </SafeAreaView>
+      <UIModal isOpen={isOpen} onClose={onClose}>
+        <View style={styles.modalContent}>
+          <UIText>
+            This is a universal modal window. To close it, click the cross or the background.
+          </UIText>
+        </View>
+      </UIModal>
+    </UIScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.nobel,
-  },
   heading: {
     textAlign: 'center',
   },
@@ -40,5 +42,8 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 20,
     paddingHorizontal: 15,
+  },
+  modalContent: {
+    alignItems: 'center',
   },
 });

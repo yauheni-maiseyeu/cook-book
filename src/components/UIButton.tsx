@@ -40,6 +40,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.green,
     padding: 20,
     borderRadius: 10,
+    shadowColor: Colors.codGray,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   text: {
     fontSize: 24,
