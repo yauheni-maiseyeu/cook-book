@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   text: {
+    textAlign: 'center',
     fontSize: 24,
     fontWeight: 'bold',
     color: Colors.white,

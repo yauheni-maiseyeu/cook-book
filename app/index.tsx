@@ -1,26 +1,30 @@
-import { UIButton } from '@/components/UIButton';
-import { UIInput } from '@/components/UIInput';
-import { UIModal } from '@/components/UIModal';
-import { UIScreen } from '@/components/UIScreen';
-import { UIText } from '@/components/UIText';
+import { UIButton } from '@/components/ui/UIButton';
+import { UIInput } from '@/components/ui/UIInput';
+import { UIModal } from '@/components/ui/UIModal';
+import { UIScreen } from '@/components/ui/UIScreen';
+import { UIText } from '@/components/ui/UIText';
+import Colors from '@/constants/Colors';
 import { useModal } from '@/hooks/useModal';
-import { Stack } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 export default function Index() {
   const { isOpen, onClose, onOpen } = useModal();
+  const router = useRouter();
 
+  const goToUsers = () => {
+    router.push('/users');
+  };
   return (
-    <UIScreen isHeaderNeeded={true} leftIcon title="UIHeader">
-      <Stack.Screen options={{ headerShown: false }} />
+    <UIScreen isHeaderNeeded title="Главный экран">
       <View style={styles.content}>
-        <UIText type="header" style={styles.heading}>
+        {/* <UIText type="header" style={styles.heading}>
           Title
         </UIText>
-        <UIInput placeholder="Enter your text" label="Enter your text" />
-        <UIButton label="Open modal" action={onOpen} />
+        <UIInput placeholder="Enter your text" label="Enter your text" /> */}
+        <UIButton style={styles.modalButton} label="Open modal" action={onOpen} />
 
-        <UIButton label="Ok" action={() => {}} />
+        <UIButton label="Перейти к списку пользователей" action={goToUsers} />
       </View>
 
       <UIModal isOpen={isOpen} onClose={onClose}>
@@ -41,9 +45,14 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     gap: 20,
+    justifyContent: 'flex-end',
     paddingHorizontal: 15,
+    paddingVertical: 15,
   },
   modalContent: {
     alignItems: 'center',
+  },
+  modalButton: {
+    backgroundColor: Colors.codGray,
   },
 });

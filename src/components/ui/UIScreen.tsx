@@ -1,7 +1,7 @@
 import Colors from '@/constants/Colors';
 import { FC } from 'react';
-import { StyleProp, StyleSheet, ViewProps, ViewStyle } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleProp, StyleSheet, View, ViewProps, ViewStyle } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IUIHeaderProps, UIHeader } from './UIHeader';
 
 interface IUIScreenProps extends ViewProps, IUIHeaderProps {
@@ -20,24 +20,35 @@ export const UIScreen: FC<IUIScreenProps> = ({
   rightIcon,
   ...props
 }) => {
+  const insets = useSafeAreaInsets();
+  const contentStyle = {
+    flex: 1,
+    paddingBottom: insets.bottom,
+  };
+
   return (
-    <SafeAreaView style={[styles.container, screenStyle]} {...props}>
+    // <SafeAreaView style={[styles.container, screenStyle]} {...props}>
+
+    <View style={[styles.container, screenStyle]} {...props}>
       {isHeaderNeeded && (
         <UIHeader
           title={title}
-          headerStyle={headerStyle}
+          headerStyle={[headerStyle, { paddingTop: insets.top, height: 70 + insets.top }]}
           leftIcon={leftIcon}
           rightIcon={rightIcon}
         />
       )}
-      {children}
-    </SafeAreaView>
+
+      <View style={contentStyle}>{children}</View>
+    </View>
+
+    // </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.nobel,
+    // backgroundColor: Colors.nobel,
   },
 });

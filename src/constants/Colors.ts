@@ -5,7 +5,8 @@ const Colors = {
   cinnabar: '#e74c3c',
   white: '#ffffff',
   nobel: '#b5b5b5',
-  green: '#00FF00',
+  green: '#00ba00ff',
+  iceberg: '#DFF3F6',
 };
 
 export default Colors;
