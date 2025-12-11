@@ -18,8 +18,8 @@ export default function UserDetailsScreen() {
     );
   }
   return (
-    <UIScreen isHeaderNeeded leftIcon title="Детали пользователя">
-      <View style={styles.container}>
+    <UIScreen style={styles.container} isHeaderNeeded leftIcon title="Детали пользователя">
+      <View style={styles.content}>
         <View style={styles.avatarWrap}>
           <Image style={styles.avatar} source={{ uri: user.avatarUrl }} />
         </View>
@@ -38,6 +38,10 @@ export default function UserDetailsScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: Colors.iceberg,
+  },
+  content: {
     flex: 1,
     gap: 15,
     paddingHorizontal: 15,

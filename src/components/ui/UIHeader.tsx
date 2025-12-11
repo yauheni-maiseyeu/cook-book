@@ -28,7 +28,7 @@ export const UIHeader: FC<IUIHeaderProps> = ({ title, headerStyle, leftIcon, rig
         <View>
           {leftIcon && (
             <TouchableOpacity onPress={goBack}>
-              <AntDesign name="left" size={24} color={Colors.mineShaft} />
+              <AntDesign name="left" size={24} color={Colors.white} />
             </TouchableOpacity>
           )}
         </View>
@@ -36,7 +36,7 @@ export const UIHeader: FC<IUIHeaderProps> = ({ title, headerStyle, leftIcon, rig
         <View>
           {rightIcon && (
             <TouchableOpacity onPress={() => null}>
-              <AntDesign name="right" size={24} color={Colors.mineShaft} />
+              <AntDesign name="right" size={24} color={Colors.white} />
             </TouchableOpacity>
           )}
         </View>
@@ -47,7 +47,7 @@ export const UIHeader: FC<IUIHeaderProps> = ({ title, headerStyle, leftIcon, rig
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.nobel,
+    backgroundColor: Colors.codGray,
     width: '100%',
   },
   content: {
@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 24,
-    color: Colors.mineShaft,
+    color: Colors.white,
   },
 });

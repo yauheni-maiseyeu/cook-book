@@ -11,7 +11,7 @@ export interface IUserCard {
 export const USERS: IUserCard[] = [
   {
     id: 'user-201',
-    name: 'Алексей Смирнов',
+    name: 'Алена Смирнова',
     description: 'Frontend Developer, React Native / Expo expert.',
     avatarUrl: 'https://picsum.photos/id/64/100/100',
     role: 'Разработчик',
