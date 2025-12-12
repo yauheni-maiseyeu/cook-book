@@ -1,5 +1,5 @@
 import Colors from '@/constants/Colors';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -16,7 +16,13 @@ interface IUIInputProps extends TextInputProps {
   containerStyle?: StyleProp<ViewStyle>;
 }
 
-export const UIInput = ({ placeholder, label, style, containerStyle, ...props }: IUIInputProps) => {
+export const UIInput: FC<IUIInputProps> = ({
+  placeholder,
+  label,
+  style,
+  containerStyle,
+  ...props
+}) => {
   const [text, setText] = useState('');
 
   return (
@@ -43,9 +49,9 @@ const styles = StyleSheet.create({
     color: Colors.codGray,
   },
   field: {
-    padding: 10,
+    padding: 20,
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
     borderColor: Colors.mineShaft,
     backgroundColor: Colors.white,
   },

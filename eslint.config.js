@@ -1,14 +1,3 @@
-// https://docs.expo.dev/guides/using-eslint/
-// const { defineConfig } = require('eslint/config');
-// const expoConfig = require('eslint-config-expo/flat');
-
-// module.exports = defineConfig([
-//   expoConfig,
-//   {
-//     ignores: ['dist/*'],
-//   },
-// ]);
-
 module.exports = {
   root: true,
   env: {
@@ -28,7 +17,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-native/all',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   settings: {
     react: {
@@ -42,6 +31,6 @@ module.exports = {
     'react-native/no-inline-styles': 'warn',
     'no-console': 'warn',
     'prettier/prettier': 'warn',
-    'quotes':['error', 'single']
+    quotes: ['error', 'single'],
   },
 };

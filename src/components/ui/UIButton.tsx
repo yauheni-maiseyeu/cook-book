@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { UIText } from './UIText';
 import Colors from '@/constants/Colors';
+import { FC } from 'react';
 
 interface IIUButtonProps {
   label: string;
@@ -16,13 +17,13 @@ interface IIUButtonProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export const UIButton = ({
+export const UIButton: FC<IIUButtonProps> = ({
   label,
   action,
   isLoading,
   isDisabled = isLoading,
   style,
-}: IIUButtonProps) => {
+}) => {
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={action} disabled={isDisabled}>
       {isLoading ? (

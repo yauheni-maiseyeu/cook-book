@@ -1,4 +1,5 @@
 import Colors from '@/constants/Colors';
+import { FC } from 'react';
 import { StyleProp, TextStyle, Text, StyleSheet, TextProps } from 'react-native';
 
 type TextType = 'header' | 'subtext' | 'error' | 'default';
@@ -9,7 +10,7 @@ interface IUITextProps extends TextProps {
   style?: StyleProp<TextStyle>;
 }
 
-export const UIText = ({ children, type = 'default', style, ...props }: IUITextProps) => {
+export const UIText: FC<IUITextProps> = ({ children, type = 'default', style, ...props }) => {
   return (
     <Text style={[styles[type], style]} {...props}>
       {children}

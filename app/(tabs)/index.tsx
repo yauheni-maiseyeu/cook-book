@@ -11,8 +11,12 @@ export default function HomeScreen() {
   const { isOpen, onClose, onOpen } = useModal();
   const router = useRouter();
 
+  const handleSignOut = () => {
+    router.replace('/login');
+  };
+
   const goToUsers = () => {
-    router.push('/users');
+    router.push('/(tabs)/users');
   };
   return (
     <UIScreen style={styles.container} isHeaderNeeded title="Главный экран">
@@ -20,6 +24,7 @@ export default function HomeScreen() {
         <View style={styles.content}>
           <UIButton style={styles.modalButton} label="Open modal" action={onOpen} />
           <UIButton label="Перейти к списку пользователей" action={goToUsers} />
+          <UIButton label="Выйти" action={handleSignOut} style={styles.logoutButton} />
         </View>
 
         <UIModal isOpen={isOpen} onClose={onClose}>
@@ -54,5 +59,9 @@ const styles = StyleSheet.create({
   },
   modalButton: {
     backgroundColor: Colors.codGray,
+  },
+  logoutButton: {
+    backgroundColor: Colors.cinnabar,
+    marginTop: 20,
   },
 });

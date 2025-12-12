@@ -7,6 +7,7 @@ const Colors = {
   nobel: '#b5b5b5',
   green: '#00ba00ff',
   iceberg: '#DFF3F6',
+  tango: '#F47F2A',
 };
 
 export default Colors;
