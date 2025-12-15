@@ -23,7 +23,7 @@
 
 .env
 .env.*
-!.env.example # Опционально: может быть полезно, если вы хотите оставить шаблон .env
+!.env.example
 
 .idea/
 .vscode/
