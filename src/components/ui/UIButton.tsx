@@ -25,7 +25,11 @@ export const UIButton: FC<IIUButtonProps> = ({
   style,
 }) => {
   return (
-    <TouchableOpacity style={[styles.container, style]} onPress={action} disabled={isDisabled}>
+    <TouchableOpacity
+      style={[styles.container, style, isDisabled && styles.disabled]}
+      onPress={action}
+      disabled={isDisabled}
+    >
       {isLoading ? (
         <ActivityIndicator size="large" color={Colors.white} />
       ) : (
@@ -55,5 +59,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: Colors.white,
+  },
+  disabled: {
+    opacity: 0.7,
   },
 });
