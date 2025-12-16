@@ -8,22 +8,36 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegistrationData, registrationSchema } from '@/types/validationSchema';
+import { useTranslation } from 'react-i18next';
+import { LanguageSelector } from '@/components/LanguageSelector';
+import { useEffect } from 'react';
 
 export default function RegistrationScreen() {
+  const { t, i18n } = useTranslation();
+  const router = useRouter();
+
   const {
     control,
     handleSubmit,
-    formState: { isValid },
+    trigger,
+    formState: { isValid, errors },
   } = useForm<RegistrationData>({
     resolver: yupResolver(registrationSchema),
     mode: 'onChange',
     defaultValues: { email: '', password: '', confirmPassword: '' },
   });
 
+  useEffect(() => {
+    const fieldsWithErrors = Object.keys(errors) as (keyof RegistrationData)[];
+
+    if (fieldsWithErrors.length > 0) {
+      trigger(fieldsWithErrors);
+    }
+  }, [i18n.language, trigger, errors]);
+
   const onSubmit = () => {
     router.replace('/(tabs)');
   };
-  const router = useRouter();
 
   const goTologin = () => {
     router.push('/login');
@@ -32,14 +46,20 @@ export default function RegistrationScreen() {
   const handleRegister = handleSubmit(onSubmit);
 
   return (
-    <UIScreen style={styles.container} leftIcon isHeaderNeeded title="Регистрация">
+    <UIScreen
+      style={styles.container}
+      leftIcon
+      isHeaderNeeded
+      title={t('registrationTitle')}
+      rightIcon={<LanguageSelector />}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
         <UIText type="header" style={styles.title}>
-          Создание аккаунта
+          {t('creatingAccount')}
         </UIText>
         <View style={styles.inputWrap}>
           <Controller
@@ -47,7 +67,7 @@ export default function RegistrationScreen() {
             name="email"
             render={({ field: { onChange, onBlur, value }, fieldState: { isTouched, error } }) => (
               <UIInput
-                placeholder="Введите email"
+                placeholder={t('emailPlaceholder')}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -63,7 +83,7 @@ export default function RegistrationScreen() {
             name="password"
             render={({ field: { onChange, onBlur, value }, fieldState: { isTouched, error } }) => (
               <UIInput
-                placeholder="Введите пароль"
+                placeholder={t('passwordPlaceholder')}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -79,7 +99,7 @@ export default function RegistrationScreen() {
             name="confirmPassword"
             render={({ field: { onChange, onBlur, value }, fieldState: { isTouched, error } }) => (
               <UIInput
-                placeholder="Повторите пароль"
+                placeholder={t('confirmPlaceholder')}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -91,10 +111,10 @@ export default function RegistrationScreen() {
             )}
           />
         </View>
-        <UIButton label="Зарегистрироваться" action={handleRegister} isDisabled={!isValid} />
+        <UIButton label={t('registerButton')} action={handleRegister} isDisabled={!isValid} />
         <View style={styles.separator} />
-        <UIText style={styles.registerText}>Уже есть аккаунт?</UIText>
-        <UIButton label="Войти" action={goTologin} style={styles.secondaryButton} />
+        <UIText style={styles.registerText}>{t('haveAccount')}</UIText>
+        <UIButton label={t('loginButton')} action={goTologin} style={styles.secondaryButton} />
       </ScrollView>
     </UIScreen>
   );

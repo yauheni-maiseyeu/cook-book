@@ -1,0 +1,36 @@
+{
+  "welcome": "Welcome!",
+  "loginTitle": "Login to system",
+  "registrationTitle": "Registration",
+  "creatingAccount": "Account creation",
+  "emailPlaceholder": "Enter email",
+  "passwordPlaceholder": "Enter password",
+  "confirmPlaceholder": "Confirm password",
+  "loginButton": "Log In",
+  "goToRegisterButton": "Registration",
+  "registerButton": "Sign Up",
+  "noAccount": "No account?",
+  "haveAccount": "Already have an account?",
+  "selectLanguage": "Select language",
+  "apply": "Apply",
+  "homeScreenTitle": "Home screen",
+  "openModalButton": "Open modal",
+  "goToUsersListButton": "Go to users list",
+  "logOutButton": "Log out",
+  "mainTabTitle": "Home",
+  "usersTabTitle": "Users",
+  "usersScreenTitle": "Users list",
+  "userScreenTitle": "User details",
+  "noUserTitle": "User not found",
+  "userOccupation": "Occupation",
+  "userDescription": "About me",
+  "userFollowers": "Followers",
+
+  "errors": {
+    "required": "This field is required",
+    "email": "Enter a valid email",
+    "passwordMin": "Password must be at least 6 characters",
+    "noSpaces": "Password cannot contain spaces",
+    "equalPasswords": "Passwords must be equal"
+  }
+}

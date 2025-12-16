@@ -1,16 +1,19 @@
+import i18n from '@/localization';
 import * as yup from 'yup';
+
+const t = (key: string, options?: any) => i18n.t(key, options);
 
 const emailField = yup
   .string()
   .trim()
-  .required('Email обязателен')
-  .email('Введите корректный email');
+  .required(() => t('errors.required'))
+  .email(() => t('errors.email'));
 
 const passwordField = yup
   .string()
-  .required('Пароль обязателен')
-  .min(6, 'Пароль должен быть не менее 6 символов')
-  .matches(/^\S+$/, 'Пароль не должен содержать пробелов');
+  .required(() => t('errors.required'))
+  .min(6, ({ min }) => t('errors.passwordMin', { count: min }))
+  .matches(/^\S+$/, () => t('errors.noSpaces'));
 
 export const loginSchema = yup.object({
   email: emailField,
@@ -22,8 +25,8 @@ export const registrationSchema = yup.object({
   password: passwordField,
   confirmPassword: yup
     .string()
-    .required('Подтвердите пароль')
-    .oneOf([yup.ref('password')], 'Пароли должны совпадать'),
+    .required(() => t('errors.required'))
+    .oneOf([yup.ref('password')], () => t('errors.equalPasswords')),
 });
 
 export type LoginData = yup.InferType<typeof loginSchema>;

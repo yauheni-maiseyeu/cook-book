@@ -8,12 +8,19 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginData, loginSchema } from '@/types/validationSchema';
+import { useTranslation } from 'react-i18next';
+import { LanguageSelector } from '@/components/LanguageSelector';
+import { useEffect } from 'react';
 
 export default function LoginScreen() {
+  const { t, i18n } = useTranslation();
+  const router = useRouter();
+
   const {
     control,
     handleSubmit,
-    formState: { isValid },
+    trigger,
+    formState: { isValid, errors },
   } = useForm<LoginData>({
     resolver: yupResolver(loginSchema),
     mode: 'onChange',
@@ -23,10 +30,17 @@ export default function LoginScreen() {
     },
   });
 
+  useEffect(() => {
+    const fieldsWithErrors = Object.keys(errors) as (keyof LoginData)[];
+
+    if (fieldsWithErrors.length > 0) {
+      trigger(fieldsWithErrors);
+    }
+  }, [i18n.language, trigger, errors]);
+
   const onSubmit = () => {
     router.replace('/(tabs)');
   };
-  const router = useRouter();
 
   const goToRegistration = () => {
     router.push('/registration');
@@ -34,38 +48,48 @@ export default function LoginScreen() {
   const handleLogin = handleSubmit(onSubmit);
 
   return (
-    <UIScreen style={styles.container} isHeaderNeeded title="Вход в систему">
+    <UIScreen
+      style={styles.container}
+      isHeaderNeeded
+      title={t('loginTitle')}
+      rightIcon={<LanguageSelector />}
+    >
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
         <UIText type="header" style={styles.title}>
-          Добро пожаловать!
+          {t('welcome')}
         </UIText>
         <View style={styles.inputWrap}>
           <Controller
             control={control}
             name="email"
-            render={({ field: { onChange, onBlur, value }, fieldState: { isTouched, error } }) => (
-              <UIInput
-                placeholder="Введите email"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                textContentType="emailAddress"
-                errorMessage={isTouched && error ? error.message : undefined}
-              />
-            )}
+            render={({ field, fieldState }) => {
+              const { onChange, onBlur, value } = field;
+              const { isTouched, error } = fieldState;
+
+              return (
+                <UIInput
+                  placeholder={t('emailPlaceholder')}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  textContentType="emailAddress"
+                  errorMessage={isTouched && error ? error.message : undefined}
+                />
+              );
+            }}
           />
           <Controller
             control={control}
             name="password"
             render={({ field: { onChange, onBlur, value }, fieldState: { isTouched, error } }) => (
               <UIInput
-                placeholder="Введите пароль"
+                placeholder={t('passwordPlaceholder')}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -76,10 +100,14 @@ export default function LoginScreen() {
           />
         </View>
 
-        <UIButton label="Войти" action={handleLogin} isDisabled={!isValid} />
+        <UIButton label={t('loginButton')} action={handleLogin} isDisabled={!isValid} />
         <View style={styles.separator} />
-        <UIText style={styles.registerText}>Нет аккаунта?</UIText>
-        <UIButton label="Регистрация" action={goToRegistration} style={styles.secondaryButton} />
+        <UIText style={styles.registerText}>{t('noAccount')}</UIText>
+        <UIButton
+          label={t('goToRegisterButton')}
+          action={goToRegistration}
+          style={styles.secondaryButton}
+        />
       </ScrollView>
     </UIScreen>
   );
