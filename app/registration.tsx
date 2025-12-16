@@ -20,8 +20,7 @@ export default function RegistrationScreen() {
     defaultValues: { email: '', password: '', confirmPassword: '' },
   });
 
-  const onSubmit = (data: RegistrationData) => {
-    console.log('Данные отправлены', data);
+  const onSubmit = () => {
     router.replace('/(tabs)');
   };
   const router = useRouter();
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 15,
     paddingHorizontal: 30,
-    paddingVertical: 10,
+    paddingTop: 10,
     paddingBottom: 100,
   },
   title: {
