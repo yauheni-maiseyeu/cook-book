@@ -5,9 +5,11 @@ import { UIText } from '@/components/ui/UIText';
 import Colors from '@/constants/Colors';
 import { useModal } from '@/hooks/useModal';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 export default function HomeScreen() {
+  const { t } = useTranslation();
   const { isOpen, onClose, onOpen } = useModal();
   const router = useRouter();
 
@@ -19,12 +21,12 @@ export default function HomeScreen() {
     router.push('/(tabs)/users');
   };
   return (
-    <UIScreen style={styles.container} isHeaderNeeded title="Главный экран">
+    <UIScreen style={styles.container} isHeaderNeeded title={t('homeScreenTitle')}>
       <View style={{ flex: 1 }}>
         <View style={styles.content}>
-          <UIButton style={styles.modalButton} label="Open modal" action={onOpen} />
-          <UIButton label="Перейти к списку пользователей" action={goToUsers} />
-          <UIButton label="Выйти" action={handleSignOut} style={styles.logoutButton} />
+          <UIButton style={styles.modalButton} label={t('openModalButton')} action={onOpen} />
+          <UIButton label={t('goToUsersListButton')} action={goToUsers} />
+          <UIButton label={t('logOutButton')} action={handleSignOut} style={styles.logoutButton} />
         </View>
 
         <UIModal isOpen={isOpen} onClose={onClose}>
