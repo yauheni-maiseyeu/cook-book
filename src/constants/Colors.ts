@@ -1,0 +1,13 @@
+const Colors = {
+  mineShaft: '#333333',
+  codGray: '#1a1a1a',
+  boulder: '#777777',
+  cinnabar: '#ff2e16ff',
+  white: '#ffffff',
+  nobel: '#b5b5b5',
+  green: '#00ba00ff',
+  iceberg: '#DFF3F6',
+  tango: '#F47F2A',
+};
+
+export default Colors;
